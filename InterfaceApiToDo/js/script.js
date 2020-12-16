@@ -1,4 +1,113 @@
 var Tarefa, Query;
+
+function verificarSeEstaLogado() {
+    var chave = localStorage.getItem('chave');
+    if(chave == null || chave == ""){
+        window.location.replace("http://127.0.0.1:5500/login.html");
+    }
+}
+
+function load(){
+    verificarSeEstaLogado();
+}
+/*
+function geUsuario (chave)
+{
+    var id = pegarQueryParam();
+
+    const url = 'https://localhost:44357/api/validarChave/'+id;
+    const params = 
+    {
+        method:'GET',
+        headers:
+        {
+            Accept:'application/json',
+            'Content-Type':'application/json'
+        }
+    };
+    fetch(url, params)
+        .then((r)=>r.json())
+        .then((json)=>{
+            document.getElementById('idtarefa').value = json.id;
+            document.getElementById('nometarefa').value = json.nome;
+            console.log(json);
+        }
+    );
+}
+*/
+
+function cadastrarUsuario()
+{
+    var nomeCompleto = document.getElementById('nome-completo').value;
+    var UserName = document.getElementById('username').value;
+    var email = document.getElementById('email').value;
+    var senha = document.getElementById('senha').value;
+
+    const url = 'https://localhost:44357/api/usuario/cadastro-usuario';
+    const params = 
+    {
+        method:'POST',
+        headers:
+        {
+            Accept:'application/json',
+            'Content-Type':'application/json'
+        },
+        body:JSON.stringify
+        (
+            {
+                "nomecompleto":nomeCompleto,
+                "username":UserName,
+                "email":email,
+                "senha": senha
+            }
+        )
+    };
+    fetch(url, params)
+        .then((r)=>r.json())
+        .then((json)=>{
+            //console.log(json);
+            window.location.href = 'http://127.0.0.1:5500/login.html';
+        });
+}
+
+function fazerLogin()
+{
+    var emailOuUserName = document.getElementById('email-ou-username').value;
+    var senha = document.getElementById('senha').value;
+
+    const url = 'https://localhost:44357/api/usuario/login';
+    const params = 
+    {
+        method:'POST',
+        headers:
+        {
+            Accept:'application/json',
+            'Content-Type':'application/json'
+        },
+        body:JSON.stringify
+        (
+            {
+                "email":emailOuUserName,
+                "username":emailOuUserName,
+                "senha": senha
+            }
+        )
+    };
+    fetch(url, params)
+        .then((r)=>r.json())
+        .then((json)=>{
+            setLocalStorage(json.chave);
+            //console.log(json);
+            window.location.href = 'http://127.0.0.1:5500/';
+        });
+}
+
+//função para gravar chave no LocalStorage
+function setLocalStorage(string){
+    localStorage.setItem('chave',string)
+}
+
+
 function pegarNome ()
 {
     Tarefa = document.getElementById('nometarefa').value;
@@ -10,11 +119,6 @@ function pegarQueryParam()
     Query = location.search.slice(1);
     var ChaveValor = Query.split('=');
     return ChaveValor[1]
-}
-
-//função para gravar chave no LocalStorage
-function setLocalStorage(string){
-    localStorage.setItem('chave',string)
 }
 
 function post ()
@@ -44,7 +148,7 @@ function post ()
         });
 }
 
-function get ()
+function get()
 {
     const url = 'https://localhost:44373/api/todo';
     const params = 
@@ -54,7 +158,7 @@ function get ()
         {
             Accept:'application/json',
             'Content-Type':'application/json',
-            chave: "964b03fbd533d25e0d9bc9de9fe9bcc0"
+            chave: localStorage.getItem('chave')
         }
     };
     fetch(url, params)
