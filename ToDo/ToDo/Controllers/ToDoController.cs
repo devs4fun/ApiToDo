@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Primitives;
@@ -19,9 +21,16 @@ namespace ToDo.Controllers
 
         [Route("api/[controller]")]
         [HttpGet]
-        public IActionResult Get([FromHeader]string chave)
+        public async Task<IActionResult> Get([FromHeader]string chave)
         {
             // veficar se a chave existe
+            var cliente = new HttpClient();
+            cliente.BaseAddress = new Uri("https://localhost:44309");
+            cliente.DefaultRequestHeaders.Accept.Clear();
+            cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            HttpResponseMessage response = await cliente.GetAsync("/api/usuario/ValidarChave");
+
             var listaDeTarefas = _tarefaRepository.Get();
             return Ok(listaDeTarefas);
         }
