@@ -2,7 +2,7 @@
 
 namespace ToDo.Migrations
 {
-    public partial class Primeiro : Migration
+    public partial class primeiro : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,7 +12,8 @@ namespace ToDo.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(nullable: true)
+                    Nome = table.Column<string>(nullable: true),
+                    IdUsuario = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

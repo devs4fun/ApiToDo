@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDo", "ToDo\ToDo.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XUnitTestProject1", "XUnitTestProject1\XUnitTestProject1.csproj", "{2D6C55E6-FDFA-49F0-8E3B-E9F545E827A8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiHeimdall", "..\..\api-heimdall\ApiHeimdall\ApiHeimdall\ApiHeimdall.csproj", "{37710D12-A57F-4C52-B902-9724584F1D14}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{2D6C55E6-FDFA-49F0-8E3B-E9F545E827A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D6C55E6-FDFA-49F0-8E3B-E9F545E827A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D6C55E6-FDFA-49F0-8E3B-E9F545E827A8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{37710D12-A57F-4C52-B902-9724584F1D14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{37710D12-A57F-4C52-B902-9724584F1D14}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{37710D12-A57F-4C52-B902-9724584F1D14}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{37710D12-A57F-4C52-B902-9724584F1D14}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

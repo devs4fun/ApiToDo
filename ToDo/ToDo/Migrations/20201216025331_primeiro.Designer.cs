@@ -9,8 +9,8 @@ using ToDo;
 namespace ToDo.Migrations
 {
     [DbContext(typeof(AppContext))]
-    [Migration("20201028002409_Primeiro")]
-    partial class Primeiro
+    [Migration("20201216025331_primeiro")]
+    partial class primeiro
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,6 +26,9 @@ namespace ToDo.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("IdUsuario")
+                        .HasColumnType("int");
 
                     b.Property<string>("Nome")
                         .HasColumnType("nvarchar(max)");

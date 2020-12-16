@@ -25,6 +25,9 @@ namespace ToDo.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("IdUsuario")
+                        .HasColumnType("int");
+
                     b.Property<string>("Nome")
                         .HasColumnType("nvarchar(max)");
 

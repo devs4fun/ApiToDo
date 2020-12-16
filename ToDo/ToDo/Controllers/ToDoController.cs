@@ -14,92 +14,137 @@ namespace ToDo.Controllers
     public class ToDoController : Controller
     {
         readonly ITarefaRepository _tarefaRepository;
+        HttpClient cliente = new HttpClient();
         public ToDoController(ITarefaRepository tarefaRepository)
         {
             _tarefaRepository = tarefaRepository;
+            cliente.BaseAddress = new Uri("https://localhost:44357");
+            cliente.DefaultRequestHeaders.Accept.Clear();
+            cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
         [Route("api/[controller]")]
         [HttpGet]
-        public async Task<IActionResult> Get([FromHeader]string chave)
+        public async Task<IActionResult> Get([FromHeader] string chave)
         {
             // veficar se a chave existe
-            var cliente = new HttpClient();
-            cliente.BaseAddress = new Uri("https://localhost:44309");
-            cliente.DefaultRequestHeaders.Accept.Clear();
-            cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            HttpResponseMessage response = await cliente.GetAsync("/api/usuario/ValidarChave");
 
-            var listaDeTarefas = _tarefaRepository.Get();
-            return Ok(listaDeTarefas);
+            HttpResponseMessage response = await cliente.PostAsJsonAsync("/api/usuario/validarchave", chave);
+            if (response.StatusCode.ToString() == "OK")
+            {
+                var listaDeTarefas = _tarefaRepository.Get();
+                return Ok(listaDeTarefas);
+            }
+
+            return BadRequest();
         }
 
         [Route("api/[controller]/{id}")]
         [HttpGet]
-        public IActionResult Pegar([FromRoute] int id, [FromHeader] string chave)
+        public async Task<IActionResult> Pegar([FromRoute] int id, [FromHeader] string chave)
         {
-            // veficar se a chave existe
-            if (id <= 0)
-                return NotFound();
+            HttpResponseMessage response = await cliente.PostAsJsonAsync("/api/usuario/validarchave", chave);
+            if (response.StatusCode.ToString() == "OK")
+            {
+                if (id <= 0)
+                    return NotFound();
 
-            var tarefa = _tarefaRepository.Pegar(id);
+                var tarefa = _tarefaRepository.Pegar(id);
 
-            if (tarefa == null)
-                return NotFound();
+                if (tarefa == null)
+                    return NotFound();
 
-            else
-                return Ok(tarefa);
+                else
+                    return Ok(tarefa);
+            }
+
+            return BadRequest();
         }
 
         [Route("api/[controller]")]
         [HttpPost]
-        public IActionResult Adicionar([FromBody] Tarefa tarefa, [FromHeader] string chave)
+        public async Task<IActionResult> Adicionar([FromBody] Tarefa tarefa, [FromHeader] string chave)
         {
             // veficar se a chave existe, retornar o usuario dessa chave e vincular o usuário a essa tarefa
-            if (string.IsNullOrEmpty(tarefa.Nome))
-                return BadRequest();
-            else
-                _tarefaRepository.Adicionar(tarefa);
-            return Ok(tarefa);
+            HttpResponseMessage response = await cliente.PostAsJsonAsync("/api/usuario/validarchave", chave);
+
+            if (response.StatusCode.ToString() == "OK")
+            {
+                var requisicao = response.Content.ReadAsAsync<Usuario>();
+                if (string.IsNullOrEmpty(tarefa.Nome))
+                    return BadRequest();
+                else
+                {
+
+                    tarefa.IdUsuario = requisicao.Result.Id;
+                        _tarefaRepository.Adicionar(tarefa);
+                    return Ok(tarefa);
+                }
+                    
+
+            }
+
+            return BadRequest();
         }
 
         [Route("api/[controller]/{id}")]
         [HttpDelete]
-        public IActionResult Deletar([FromRoute] int id, [FromHeader] string chave)
+        public async Task<IActionResult> Deletar([FromRoute] int id, [FromHeader] string chave)
         {
             // veficar se a chave existe, retornar o usuario dessa chave ,verificar se o usuario está vinculado a essa tarefa.
-            if (id > 0)
-            {
-                var tarefa = _tarefaRepository.Pegar(id);
+            HttpResponseMessage response = await cliente.PostAsJsonAsync("/api/usuario/validarchave", chave);
 
-                if (tarefa == null)
+            if (response.StatusCode.ToString() == "OK")
+            {
+                var requisicao = response.Content.ReadAsAsync<Usuario>();
+
+                if (id > 0)
                 {
-                    return BadRequest();
-                }
-                    _tarefaRepository.Deletar(tarefa);
-                    return Ok();
-                    //Se Ok() retornar com parametro conseguimos verificar se o stuatus http é 200
-                    //return Ok(tarefa);
-            } 
-            else
-            {
-                return BadRequest();
-            }
+                    var tarefa = _tarefaRepository.Pegar(id);
 
-            
+                    if (tarefa == null)
+                    {
+                        return BadRequest();
+                    }
+
+                    if (requisicao.Result.Id == tarefa.IdUsuario)
+                    {
+                        _tarefaRepository.Deletar(tarefa);
+                        return Ok();
+                    }
+                }
+                                
+            }
+            return BadRequest();
         }
 
         [Route("api/[controller]")]
         [HttpPatch]
-        public IActionResult Atualizar([FromBody] Tarefa tarefa, [FromHeader] string chave)
+        public async Task<IActionResult> Atualizar([FromBody] Tarefa tarefa, [FromHeader] string chave)
         {
-            // veficar se a chave existe, retornar o usuario dessa chave ,verificar se o usuario está vinculado a essa tarefa.
             if (tarefa.Id <= 0 || string.IsNullOrEmpty(tarefa.Nome))
+            {
                 return BadRequest();
-            else
-                _tarefaRepository.Atualizar(tarefa);
-            return Ok();
+            }
+
+            // veficar se a chave existe, retornar o usuario dessa chave ,verificar se o usuario está vinculado a essa tarefa.
+            HttpResponseMessage response = await cliente.PostAsJsonAsync("/api/usuario/validarchave", chave);
+
+            if (response.StatusCode.ToString() == "OK")
+            {
+                var requisicao = response.Content.ReadAsAsync<Usuario>();
+
+                //var tarefaDoBanco = _tarefaRepository.Pegar(tarefa.Id);
+
+                if (requisicao.Result.Id == tarefa.IdUsuario)
+                {
+                    _tarefaRepository.Atualizar(tarefa);
+                    return Ok(tarefa);
+                }
+            }
+
+            return BadRequest();   
         }
     }
 }
