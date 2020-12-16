@@ -12,6 +12,11 @@ function pegarQueryParam()
     return ChaveValor[1]
 }
 
+//função para gravar chave no LocalStorage
+function setLocalStorage(string){
+    localStorage.setItem('chave',string)
+}
+
 function post ()
 {
     pegarNome();
@@ -48,7 +53,8 @@ function get ()
         headers:
         {
             Accept:'application/json',
-            'Content-Type':'application/json'
+            'Content-Type':'application/json',
+            chave: "964b03fbd533d25e0d9bc9de9fe9bcc0"
         }
     };
     fetch(url, params)
