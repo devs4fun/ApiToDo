@@ -1,4 +1,4 @@
-var Tarefa, Query;
+var Tarefa, Query, IdUsuario;
 
 function verificarSeEstaLogado() {
     var chave = localStorage.getItem('chave');
@@ -114,6 +114,12 @@ function pegarNome ()
     console.log(Tarefa);
 }
 
+function pegarIdDoUsuarioQueCriouOTodo ()
+{
+    IdUsuario = document.getElementById('idusuariobd').value;
+    console.log(IdUsuario);
+}
+
 function pegarQueryParam()
 {
     Query = location.search.slice(1);
@@ -131,7 +137,8 @@ function post ()
         headers:
         {
             Accept:'application/json',
-            'Content-Type':'application/json'
+            'Content-Type':'application/json',
+            chave: localStorage.getItem('chave')
         },
         body:JSON.stringify
         (
@@ -168,6 +175,7 @@ function get()
             {
                 var tarefaid = document.createElement('td');
                 tarefaid.textContent = json[i].id;
+
                 var tarefanome = document.createElement('td');
                 tarefanome.textContent = json[i].nome;
 
@@ -208,7 +216,8 @@ function getUnico ()
         headers:
         {
             Accept:'application/json',
-            'Content-Type':'application/json'
+            'Content-Type':'application/json',
+            chave: localStorage.getItem('chave')
         }
     };
     fetch(url, params)
@@ -216,6 +225,7 @@ function getUnico ()
         .then((json)=>{
             document.getElementById('idtarefa').value = json.id;
             document.getElementById('nometarefa').value = json.nome;
+            document.getElementById('idusuariobd').value = json.idUsuario;
             console.log(json);
         }
     );
@@ -227,7 +237,13 @@ function deletar(id)
     const url = 'https://localhost:44373/api/todo/'+id;
     const params = 
     {
-        method:'DELETE'
+        method:'DELETE',
+        headers:
+        {
+            Accept:'application/json',
+            'Content-Type':'application/json',
+            chave: localStorage.getItem('chave')
+        }
     };
     fetch(url, params);
     alert('Deletado');
@@ -237,6 +253,9 @@ function deletar(id)
 function editar()
 {
     pegarNome();
+
+    pegarIdDoUsuarioQueCriouOTodo();
+
     var id = pegarQueryParam();
     //var Id = ParseInt(id);
     //alert(typeOf(ParseInt(id)));
@@ -247,16 +266,18 @@ function editar()
         headers:
         {
             Accept:'application/json',
-            'Content-Type':'application/json'
+            'Content-Type':'application/json',
+            chave: localStorage.getItem('chave')
         },
         body:JSON.stringify
         (
             {
                 "Id":parseInt(id),
+                "IdUsuario": parseInt(IdUsuario),
                 "Nome":Tarefa
             }
         )
     };
     fetch(url, params)
-        window.location.replace("http://127.0.0.1:5500/");
+        window.location.href = "http://127.0.0.1:5500/";
 }
