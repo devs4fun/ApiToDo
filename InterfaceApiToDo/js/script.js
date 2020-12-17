@@ -150,7 +150,8 @@ function post ()
     fetch(url, params)
         .then((r)=>r.json())
         .then((json)=>{
-            console.log(json);
+            setLocalStorage(json.chave);
+            //console.log(json);
             window.location.href = 'http://127.0.0.1:5500/';
         });
 }

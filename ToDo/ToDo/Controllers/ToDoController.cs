@@ -28,13 +28,20 @@ namespace ToDo.Controllers
         public async Task<IActionResult> Get([FromHeader] string chave)
         {
             // veficar se a chave existe
-
-
             HttpResponseMessage response = await cliente.PostAsJsonAsync("/api/usuario/validarchave", chave);
             if (response.StatusCode.ToString() == "OK")
             {
+                var requisicao = response.Content.ReadAsAsync<Usuario>();
                 var listaDeTarefas = _tarefaRepository.Get();
-                return Ok(listaDeTarefas);
+                List<Tarefa> listaTarefasUsuario = new List<Tarefa>();
+                foreach(Tarefa t in listaDeTarefas)
+                {
+                    if(t.IdUsuario == requisicao.Result.Id)
+                    {
+                        listaTarefasUsuario.Add(t);
+                    }
+                }
+                return Ok(listaTarefasUsuario);
             }
 
             return BadRequest();
@@ -47,16 +54,17 @@ namespace ToDo.Controllers
             HttpResponseMessage response = await cliente.PostAsJsonAsync("/api/usuario/validarchave", chave);
             if (response.StatusCode.ToString() == "OK")
             {
+                var requisicao = response.Content.ReadAsAsync<Usuario>();
                 if (id <= 0)
                     return NotFound();
 
                 var tarefa = _tarefaRepository.Pegar(id);
-
                 if (tarefa == null)
                     return NotFound();
-
-                else
+                if (tarefa.IdUsuario == requisicao.Result.Id)
+                {
                     return Ok(tarefa);
+                }
             }
 
             return BadRequest();

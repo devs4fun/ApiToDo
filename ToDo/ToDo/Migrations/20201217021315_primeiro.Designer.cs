@@ -9,7 +9,7 @@ using ToDo;
 namespace ToDo.Migrations
 {
     [DbContext(typeof(AppContext))]
-    [Migration("20201216025331_primeiro")]
+    [Migration("20201217021315_primeiro")]
     partial class primeiro
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
