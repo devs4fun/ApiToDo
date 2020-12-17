@@ -8,8 +8,25 @@ function verificarSeEstaLogado() {
 }
 
 function fazerLogout(){
-    localStorage.removeItem("chave");
-    window.location.href = 'http://127.0.0.1:5500/login.html';
+    
+    const url = 'https://localhost:44357/api/usuario/logout';
+    const params = 
+    {
+        method:'POST',
+        headers:
+        {
+            Accept:'application/json',
+            'Content-Type':'application/json',
+            chave: localStorage.getItem('chave')
+        }
+    };
+    fetch(url, params)
+        .then((r)=>r.json())
+        .then((json)=>{
+            //console.log(json);
+            localStorage.removeItem("chave");
+            window.location.href = 'http://127.0.0.1:5500/login.html';
+        });
 }
 
 function load(){
