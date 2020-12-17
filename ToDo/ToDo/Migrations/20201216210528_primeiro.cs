@@ -19,12 +19,33 @@ namespace ToDo.Migrations
                 {
                     table.PrimaryKey("PK_Tarefas", x => x.Id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Usuarios",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Ativo = table.Column<bool>(nullable: false),
+                    Chave = table.Column<string>(nullable: true),
+                    NomeCompleto = table.Column<string>(nullable: true),
+                    UserName = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    Senha = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Usuarios", x => x.Id);
+                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "Tarefas");
+
+            migrationBuilder.DropTable(
+                name: "Usuarios");
         }
     }
 }
