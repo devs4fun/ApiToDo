@@ -7,6 +7,11 @@ function verificarSeEstaLogado() {
     }
 }
 
+function fazerLogout(){
+    localStorage.removeItem("chave");
+    window.location.href = 'http://127.0.0.1:5500/login.html';
+}
+
 function load(){
     verificarSeEstaLogado();
 }
@@ -150,7 +155,7 @@ function post ()
     fetch(url, params)
         .then((r)=>r.json())
         .then((json)=>{
-            setLocalStorage(json.chave);
+            //setLocalStorage(json.chave);
             //console.log(json);
             window.location.href = 'http://127.0.0.1:5500/';
         });
