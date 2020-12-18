@@ -1,22 +1,45 @@
 <!DOCTYPE html>
 <head>
+    <meta name="viewport" content="width=device-width, user-scalable=no">
     <meta charset="utf-8">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/estilo.css">
+
     <title>Login</title>
 </head>
 <body>
-    <header>Bem-vindo ao App To Do</header>
+    <header>
+        <div class="header">
+            <div class="logo">App ToDo</div>
+
+            <nav>
+                <div class="nav-menu">
+                    <div class="btn-sair">
+                        Sair
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
     <main>
-        <div>
+        <div class="title">
+            Bem-vindo a app to do
+        </div>
+
+        <div class="form">
             <div>
-                <input id="email-ou-username" type="text" placeholder="E-mail ou Username">
+                <input class="input" id="email-ou-username" type="text" placeholder="E-mail ou Username">
             </div>
             <div>
-                <input id="senha" type="password" placeholder="senha">
+                <input class="input" id="senha" type="password" placeholder="Digite sua senha...">
             </div>
             <div>
-                <button onclick="fazerLogin()" id="btn-entrar">Entrar</button>
+                <button class="button" onclick="fazerLogin()" id="btn-entrar">Entrar</button>
             </div>
         </div>
+
         <div>
             <div>
                 <a href="cadastro.html">Novo por aqui? Cadastrar-se!</a>

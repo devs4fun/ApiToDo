@@ -196,8 +196,8 @@ function get()
         .then((json)=>{
             for(var i = 0; i < json.length; i++)
             {
-                var tarefaid = document.createElement('td');
-                tarefaid.textContent = json[i].id;
+                //var tarefaid = document.createElement('td');
+                //tarefaid.textContent = json[i].id;
 
                 var tarefanome = document.createElement('td');
                 tarefanome.textContent = json[i].nome;
@@ -215,7 +215,7 @@ function get()
                 buttondel.setAttribute('onClick', "deletar("+json[i].id+")");
 
                 var tr = document.createElement('tr');
-                tr.appendChild(tarefaid);
+                //tr.appendChild(tarefaid);
                 tr.appendChild(tarefanome);
                 tr.appendChild(a);
                 tr.appendChild(buttondel);

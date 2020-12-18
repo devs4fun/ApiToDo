@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, user-scalable=no">
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/estilo.css">
 
+        <title></title>
     </head>
     <script src="js/script.js"></script>
     <script>
@@ -9,29 +15,46 @@
     </script>
     <body>
         <header>
-            <nav>
-                <div>
-                    <input type="button" onclick="fazerLogout()" value="sair">
-                </div>
-            </nav>
+            <div class="header">
+                <div class="logo">App ToDo</div>
+    
+                <nav>
+                    <div class="nav-menu">
+                        <div class="btn-sair">
+                            <input class="input-btn" type="button" onclick="fazerLogout()" value="Sair">
+                        </div>
+                    </div>
+                </nav>
+            </div>
         </header>
-        <div>
-            Nome da Tarefa: 
-            <input type="text" id="nometarefa">
-            <button onclick="post()" >Enviar</button>
+
+        <div class="h1">
+            <h1>Tarefas</h1>
         </div>
+
         <div>
             <table>
                 <thead>
                     <tr>
-                        <td>id: </td>
-                        <td>nome: </td>
+                        <td class="displaynone">id: </td>
+                        <td class="displaynone">nome: </td>
                     </tr>
                 </thead>
                 <tbody class="tbody">
 
                 </tbody>
             </table>
+        </div>
+
+        <div class="corpo">
+        <div class="nova-tarefa">
+            <input class="input-novatarefa" type="text" id="nometarefa" placeholder="Digite uma nova tarefa!">
+            <button class="input-adicionar" onclick="post()" >Adicionar</button>
+        </div>
+        </div>
+
+        <div onclick="alert('clicou')" class="btn-nova-tarefa">
+            +
         </div>
         <script src="js/script.js">
         </script>
