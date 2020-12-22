@@ -101,6 +101,22 @@ main {
     display: none;
 }
 
+.displayShow {
+    display: inline;
+}
+
+.displayHidden {
+    display: none;
+}
+
+.calcelar {
+    font-size: 20px;
+    font-weight: bold;
+    color: #8B8B8B;
+    margin-top: 40px;
+    cursor: pointer;
+}
+
 .nova-tarefa {
     z-index: 999;
     display: flex;
@@ -113,7 +129,6 @@ main {
     width: 760px;
     height: 415px;
     border-radius: 50px;
-    display: none;
 }
 
 
@@ -121,7 +136,7 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: absolute;
+    position: fixed;
     left: 85%;
     top: 70%;
     font-size: 200px;
@@ -171,13 +186,32 @@ main {
     font-size: 35px;
 }
 
+
 table {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
-tr{
-    border-bottom: 1px solid #8B8B8B;
+tbody div {
+    width: 640px;
+    border-top: 10px solid #8B8B8B;
+}
+
+.btn-editar-teste {
+    padding-right: 16px;
+    cursor: pointer;
+}
+
+.btn-excluir-teste {
+    cursor: pointer;
+}
+
+tbody div tr {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
 }
 
 td {
@@ -185,6 +219,25 @@ td {
     font-weight: bold;
     color: #8B8B8B;
     padding: 40px;
+}
+
+
+@media (max-width: 1024px)
+{
+    .nova-tarefa {
+        left: 12%;
+    }
+
+}
+
+
+@media (max-width: 768px)
+{
+    .nova-tarefa {
+        left: 2%;
+        width: 740px;
+    }
+
 }
 
 
@@ -202,6 +255,34 @@ td {
     font-size: 25px;
     text-align: center;
   }
+
+  .btn-nova-tarefa {
+    left: 80%;
+    top: 80%;
+    font-size: 120px;
+  }
+
+  tbody div {
+      width: 375px;
+  }
+
+.nova-tarefa {
+    left: 8%;
+    width:355px;
 }
 
+.input-novatarefa {
+    width:335px;
+}
+
+}
+
+@media (max-width: 375px)
+{
+    .nova-tarefa {
+        left: 3%;
+        width:355px;
+    }
+
+}
 

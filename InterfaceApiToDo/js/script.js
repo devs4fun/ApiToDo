@@ -1,3 +1,4 @@
+
 var Tarefa, Query, IdUsuario;
 
 function verificarSeEstaLogado() {
@@ -202,26 +203,40 @@ function get()
                 var tarefanome = document.createElement('td');
                 tarefanome.textContent = json[i].nome;
 
-                var buttonedt = document.createElement('button');
-                buttonedt.textContent = "Editar";
+                var buttonedt = document.createElement('img');
+                buttonedt.setAttribute('src', 'img/editar.png')
+
                 //buttonedt.setAttribute('onClick', "editar("+json[i].id+")")
 
                 var a = document.createElement('a');
                 a.appendChild(buttonedt);
                 a.href = "editar.html?id="+json[i].id;
+                a.setAttribute('class', 'btn-editar-teste');
 
-                var buttondel = document.createElement('button');
-                buttondel.textContent = "Deletar";
+
+                var buttondel = document.createElement('img');
+                buttondel.setAttribute('src', 'img/excluir.png')
                 buttondel.setAttribute('onClick', "deletar("+json[i].id+")");
+                buttondel.setAttribute('class', 'btn-excluir-teste');
+
+                var tdAcoes = document.createElement('td');
+                tdAcoes.appendChild(a);
+                tdAcoes.appendChild(buttondel);
+                tdAcoes.setAttribute('class', 'tdAcoes');
 
                 var tr = document.createElement('tr');
                 //tr.appendChild(tarefaid);
                 tr.appendChild(tarefanome);
-                tr.appendChild(a);
-                tr.appendChild(buttondel);
+                //tr.appendChild(a);
+                //tr.appendChild(buttondel);
+                tr.appendChild(tdAcoes);
+
+                var div = document.createElement('div');
+                div.appendChild(tr);
 
                 var tbody = document.querySelector('tbody');
-                tbody.appendChild(tr);
+                //tbody.appendChild(tr);
+                tbody.appendChild(div);
             }
             console.log(json);
         }
@@ -303,4 +318,12 @@ function editar()
     };
     fetch(url, params)
         window.location.href = "http://127.0.0.1:5500/";
+}
+
+function MostrarAddTarefa () {
+    document.querySelector(".corpo").classList.add('displayShow');
+}
+
+function EsconderAddTarefa () {
+    document.querySelector(".corpo").classList.remove('displayShow');
 }

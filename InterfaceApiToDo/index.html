@@ -15,7 +15,7 @@
     </script>
     <body>
         <header>
-            <div class="header">
+            <div id="mytop" class="header">
                 <div class="logo">App ToDo</div>
     
                 <nav>
@@ -40,22 +40,27 @@
                         <td class="displaynone">nome: </td>
                     </tr>
                 </thead>
+
                 <tbody class="tbody">
 
                 </tbody>
             </table>
         </div>
 
-        <div class="corpo">
+        <div id="corpoAddTarefa" class="corpo">
         <div class="nova-tarefa">
             <input class="input-novatarefa" type="text" id="nometarefa" placeholder="Digite uma nova tarefa!">
             <button class="input-adicionar" onclick="post()" >Adicionar</button>
+            <div class="calcelar" onclick="EsconderAddTarefa()">Cancelar</div>
         </div>
         </div>
 
-        <div onclick="alert('clicou')" class="btn-nova-tarefa">
-            +
+        <a href="#mytop">
+        <div div="btn-mais" onclick="MostrarAddTarefa()" class="btn-nova-tarefa">
+           +
         </div>
+        </a>
+        
         <script src="js/script.js">
         </script>
         <script>

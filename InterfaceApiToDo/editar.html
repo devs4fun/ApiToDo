@@ -1,21 +1,51 @@
 <!DOCTYPE html>
 <html>
     <head>
-
+        <meta name="viewport" content="width=device-width, user-scalable=no">
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/estilo.css">
     </head>
     <script src="js/script.js"></script>
     <script>
         load();
     </script>
     <body>
+
+        <header>
+            <div id="mytop" class="header">
+                <div class="logo">App ToDo</div>
+    
+                <nav>
+                    <div class="nav-menu">
+                        <div class="btn-sair">
+                            <input class="input-btn" type="button" onclick="fazerLogout()" value="Sair">
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
         
-        <div>
-            <input type="text" id="idusuariobd" hidden>
-            <input type="text" id="idtarefa" hidden>
-            Nome da Tarefa:
-            <input type="text" id="nometarefa">
-            <button onclick="editar()" >Atualizar</button>
+        <div class="h1">
+            <h1>Tarefas</h1>
         </div>
+
+        <div id="corpoAddTarefa" class="corpo displayShow">
+            <div class="nova-tarefa">
+                <input type="text" id="idusuariobd" hidden>
+                <input type="text" id="idtarefa" hidden>
+
+                <input class="input-novatarefa" type="text" id="nometarefa" placeholder="Digite uma nova tarefa!">
+                <button class="input-adicionar"  onclick="editar()" >Atualizar</button>
+            </div>
+            </div>
+    
+            <a href="#mytop">
+            <div div="btn-mais" onclick="MostrarAddTarefa()" class="btn-nova-tarefa">
+               +
+            </div>
+            </a>
 
         <script src="js/script.js">
         </script>

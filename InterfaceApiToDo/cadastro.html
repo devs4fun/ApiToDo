@@ -5,18 +5,19 @@
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/estilo.css">
-
     <title>Cadastro</title>
 </head>
 <body>
+
     <header>
         <div class="header">
             <div class="logo">App ToDo</div>
+
             <nav>
                 <div class="nav-menu">
-                    <button onclick="fazerLogout()" class="btn-sair">
+                    <div class="btn-sair displayHidden">
                         Sair
-                    </button>
+                    </div>
                 </div>
             </nav>
         </div>
@@ -32,22 +33,21 @@
                 <input class="input" id="nome-completo" type="text" placeholder="Nome completo">
             </div>
             <div>
-                <input class="input" id="username" type="text" placeholder="Crie um nome de usuário">
+                <input class="input" id="username" type="text" placeholder="Username">
             </div>
             <div>
-                <input class="input" id="email" type="email" placeholder="Digite um email">
+                <input class="input" id="email" type="text" placeholder="E-mail">
             </div>
             <div>
-                <input class="input" id="senha" type="password" placeholder="Digite uma senha...">
+                <input class="input" id="senha" type="password" placeholder="senha">
             </div>
             <div>
                 <button class="button" onclick="cadastrarUsuario()">Cadastrar</button>
             </div>
         </div>
-
         <div>
             <div>
-                <a href="login.html">Já tem cadastro? Faça então o seu login!</a>
+                <a href="login.html">Já tem cadastro? Fazer login!</a>
             </div>
         </div>
     </main>
