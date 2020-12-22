@@ -1,31 +1,53 @@
 <!DOCTYPE html>
 <head>
+    <meta name="viewport" content="width=device-width, user-scalable=no">
     <meta charset="utf-8">
-    <title>Login</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/estilo.css">
+
+    <title>Cadastro</title>
 </head>
 <body>
-    <header>Bem-vindo ao App To Do</header>
+    <header>
+        <div class="header">
+            <div class="logo">App ToDo</div>
+            <nav>
+                <div class="nav-menu">
+                    <button onclick="fazerLogout()" class="btn-sair">
+                        Sair
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
     <main>
-        <div>
+        <div class="title">
+            Bem-vindo a app to do
+        </div>
+
+        <div class="form">
             <div>
-                <input id="nome-completo" type="text" placeholder="Nome completo">
+                <input class="input" id="nome-completo" type="text" placeholder="Nome completo">
             </div>
             <div>
-                <input id="username" type="text" placeholder="Username">
+                <input class="input" id="username" type="text" placeholder="Crie um nome de usuário">
             </div>
             <div>
-                <input id="email" type="text" placeholder="E-mail">
+                <input class="input" id="email" type="email" placeholder="Digite um email">
             </div>
             <div>
-                <input id="senha" type="password" placeholder="senha">
+                <input class="input" id="senha" type="password" placeholder="Digite uma senha...">
             </div>
             <div>
-                <button onclick="cadastrarUsuario()">Cadastrar</button>
+                <button class="button" onclick="cadastrarUsuario()">Cadastrar</button>
             </div>
         </div>
+
         <div>
             <div>
-                <a href="login.html">Já tem cadastro? Fazer login!</a>
+                <a href="login.html">Já tem cadastro? Faça então o seu login!</a>
             </div>
         </div>
     </main>
